@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Estratégica: Mullet Madjack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos customizados para emular a estética de Mullet Madjack */
+        :root {
+            --pink: #ff00a0;
+            --cyan: #00ffff;
+            --purple: #7b00ff;
+            --black: #0d0d0d;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            line-height: 1.6;
+            overflow: hidden; /* Previne scroll da página inteira */
+        }
+
+        /* Efeito de scanlines para dar um ar retrô de CRT */
+        .scanlines::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 3px, 4px 100%;
+            z-index: 2;
+            pointer-events: none;
+            animation: flicker 0.15s infinite;
+        }
+        
+        @keyframes flicker {
+          0% { opacity: 0.2; }
+          20% { opacity: 0.8; }
+          40% { opacity: 0.3; }
+          60% { opacity: 0.9; }
+          80% { opacity: 0.2; }
+          100% { opacity: 0.8; }
+        }
+
+        .font-title {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .text-glow-pink {
+            text-shadow: 0 0 5px var(--pink), 0 0 10px var(--pink), 0 0 15px var(--pink);
+        }
+
+        .text-glow-cyan {
+            text-shadow: 0 0 5px var(--cyan), 0 0 10px var(--cyan), 0 0 15px var(--cyan);
+        }
+
+        .border-glitch {
+            border: 3px solid var(--pink);
+            box-shadow: 0 0 10px var(--pink), inset 0 0 10px var(--pink);
+        }
+        
+        .slide-content {
+            overflow-y: auto; /* Scroll apenas dentro do slide */
+        }
+        
+        /* Estilo para hyperlinks inline */
+        .slide-content a {
+            color: var(--pink);
+            text-decoration: underline;
+            transition: color 0.2s ease-in-out;
+        }
+        .slide-content a:hover {
+            color: var(--cyan);
+            text-shadow: 0 0 5px var(--cyan);
+        }
+
+        /* Custom scrollbar para o conteúdo do slide */
+        .slide-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .slide-content::-webkit-scrollbar-track {
+            background: var(--black);
+            border-left: 1px solid var(--pink);
+        }
+        .slide-content::-webkit-scrollbar-thumb {
+            background: var(--pink);
+            box-shadow: 0 0 5px var(--pink);
+        }
+        .slide-content::-webkit-scrollbar-thumb:hover {
+            background: var(--cyan);
+            box-shadow: 0 0 5px var(--cyan);
+        }
+
+        /* Animação para entrada dos slides */
+        .slide.hidden {
+            display: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .nav-button {
+            transition: all 0.2s ease;
+        }
+
+        .nav-button:hover {
+            background-color: var(--pink);
+            color: var(--black);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--pink);
+        }
+        .nav-button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            background-color: #333;
+        }
+        
+        .logo-glow {
+             filter: drop-shadow(0 0 8px var(--pink));
+             transition: filter 0.3s ease-in-out;
+        }
+        .logo-glow:hover {
+            filter: drop-shadow(0 0 12px var(--cyan));
+        }
+
+    </style>
+</head>
+<body class="bg-black flex items-center justify-center min-h-screen p-4 scanlines">
+
+    <div id="presentation-container" class="w-full max-w-5xl h-[90vh] bg-black bg-opacity-80 border-glitch rounded-lg p-6 md:p-8 flex flex-col relative">
+        
+        <!-- Slides Content -->
+        <div id="slides-wrapper" class="flex-grow overflow-hidden">
+            <!-- Slide 0: Título -->
+            <div id="slide-0" class="slide h-full flex flex-col items-center justify-center text-center fade-in">
+                <h1 class="font-title text-3xl md:text-5xl lg:text-6xl text-glow-cyan mb-4">ANÁLISE ESTRATÉGICA</h1>
+                <h2 class="font-title text-2xl md:text-4xl lg:text-5xl text-glow-pink">MULLET MADJACK</h2>
+                <p class="mt-8 text-lg">Um Estudo de Caso da HAMMER95</p>
+            </div>
+
+            <!-- Slide 1: Jogos de Sucesso -->
+            <div id="slide-1" class="slide h-full hidden flex flex-col">
+                <h2 class="font-title text-2xl md:text-4xl text-glow-cyan mb-6 text-center flex-shrink-0">1. JOGOS DE SUCESSO</h2>
+                <div class="slide-content pr-4 flex-grow">
+                    <p class="mb-4">O portfólio da HAMMER95 é definido por um único e retumbante sucesso: <strong class="text-pink-400">Mullet Madjack</strong>, seu título de estreia.</p>
+                    <ul class="list-disc list-inside space-y-3 mb-6">
+                        <li><strong class="text-cyan-400">Aclamação na Steam:</strong> <a href="https://store.steampowered.com/app/2155350/Mullet_Madjack/" target="_blank">97% de avaliações "Extremamente Positivas"</a> de mais de 6.900 análises.</li>
+                        <li><strong class="text-cyan-400">Sucesso Crítico:</strong> <a href="https://www.metacritic.com/game/mullet-madjack/" target="_blank">Metascore "Geralmente Favorável" de 88</a> no Metacritic, com elogios da IGN, Kotaku e Destructoid.</li>
+                        <li><strong class="text-cyan-400">Desempenho Comercial:</strong> Receita vitalícia estimada em <a href="https://vginsights.com/game/2155350" target="_blank">$3.4 milhões de dólares</a>.</li>
+                    </ul>
+                    <blockquote class="border-l-4 border-pink-500 pl-4 py-2 italic bg-gray-900 bg-opacity-50 rounded-r-lg">
+                        "A classificação 'Extremamente Positiva' no Steam... funciona como um motor direto para o sucesso da estratégia de marketing e vendas do jogo, criando um ciclo virtuoso e autossustentável."
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Slide 2: Público Alvo -->
+            <div id="slide-2" class="slide h-full hidden flex flex-col">
+                <h2 class="font-title text-2xl md:text-4xl text-glow-cyan mb-6 text-center flex-shrink-0">2. PÚBLICO ALVO</h2>
+                 <div class="slide-content pr-4 flex-grow">
+                    <p class="mb-4">O público é uma confluência de perfis psicográficos com apreço por estéticas nostálgicas e jogabilidade de habilidade.</p>
+                    <ul class="list-disc list-inside space-y-3 mb-6">
+                        <li><strong class="text-cyan-400">Aficionados de Animes (80s/90s):</strong> Atraídos pela estética "anime jogável", inspirada em OVAs como <a href="https://en.wikipedia.org/wiki/Gunsmith_Cats" target="_blank">Gunsmith Cats</a> e <a href="https://en.wikipedia.org/wiki/Ghost_in_the_Shell_(1995_film)" target="_blank">Ghost in the Shell</a>.</li>
+                        <li><strong class="text-cyan-400">Entusiastas de "Boomer Shooters":</strong> Fãs da jogabilidade rápida e fluida de clássicos como <a href="https://en.wikipedia.org/wiki/Doom_(1993_video_game)" target="_blank">Doom</a> e <a href="https://en.wikipedia.org/wiki/Quake_(video_game)" target="_blank">Quake</a>.</li>
+                        <li><strong class="text-cyan-400">Jogadores de Roguelite:</strong> Valorizam a alta rejogabilidade e os loops desafiadores, comparando-o a <a href="https://www.supergiantgames.com/games/hades/" target="_blank">Hades</a> e <a href="https://store.steampowered.com/app/1229490/ULTRAKILL/" target="_blank">Ultrakill</a>.</li>
+                    </ul>
+                    <blockquote class="border-l-4 border-pink-500 pl-4 py-2 italic bg-gray-900 bg-opacity-50 rounded-r-lg">
+                        "O apelo de Mullet Madjack transcende o nicho... Sua apresentação de alta qualidade e elementos narrativos cativantes atraem uma audiência de jogadores 'core' do mainstream."
+                    </blockquote>
+                </div>
+            </div>
+            
+            <!-- Slide 3: Plataformas -->
+            <div id="slide-3" class="slide h-full hidden flex flex-col">
+                <h2 class="font-title text-2xl md:text-4xl text-glow-cyan mb-6 text-center flex-shrink-0">3. PLATAFORMAS</h2>
+                 <div class="slide-content pr-4 flex-grow">
+                    <p class="mb-4">Uma estratégia de lançamento <strong class="text-pink-400">faseada e calculada</strong> para maximizar impacto e receita em cada etapa.</p>
+                    <ul class="list-disc list-inside space-y-3 mb-6">
+                        <li><strong class="text-cyan-400">Fase 1 (PC - Maio 2024):</strong> Lançamento na <a href="https://store.steampowered.com/app/2155350/Mullet_Madjack/" target="_blank">Steam</a> e GOG. Foco no público principal e otimização para Steam Deck.</li>
+                        <li><strong class="text-cyan-400">Fase 2 (Consoles - Março 2025):</strong> Expansão para Xbox e lançamento estratégico no <a href="https://www.xbox.com/pt-BR/xbox-game-pass" target="_blank">Xbox Game Pass</a>.</li>
+                        <li><strong class="text-cyan-400">Futuro Confirmado:</strong> Uma versão para <a href="https://www.nintendo.com/pt-br/switch/" target="_blank">Nintendo Switch</a> está em desenvolvimento.</li>
+                    </ul>
+                    <blockquote class="border-l-4 border-pink-500 pl-4 py-2 italic bg-gray-900 bg-opacity-50 rounded-r-lg">
+                        "Ao lançar no Game Pass quase um ano após a estreia no PC, o estúdio maximizou seus fluxos de receita... e, em seguida, recebeu um pagamento substancial da Microsoft."
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Slide 4: Marketing -->
+            <div id="slide-4" class="slide h-full hidden flex flex-col">
+                <h2 class="font-title text-2xl md:text-4xl text-glow-cyan mb-6 text-center flex-shrink-0">4. MARKETING</h2>
+                 <div class="slide-content pr-4 flex-grow">
+                    <p class="mb-4">Estratégia de <strong class="text-pink-400">"crescimento liderado pelo produto"</strong>: o próprio jogo foi a principal ferramenta de marketing.</p>
+                    <ul class="list-disc list-inside space-y-3 mb-6">
+                        <li><strong class="text-cyan-400">Demo Gratuita:</strong> Uma demo polida no <a href="https://store.steampowered.com/news/collection/nextfest" target="_blank">Steam Next Fest</a> funcionou como prova de conceito.</li>
+                        <li><strong class="text-cyan-400">Listas de Desejos:</strong> <a href="https://www.gamespress.com/pt-BR/Mullet-Mad-Jack-Launches-Today-on-Steam" target="_blank">Acumulou mais de 150.000 listas de desejos</a> antes do lançamento.</li>
+                        <li><strong class="text-cyan-400">Parcerias Estratégicas:</strong> O lançamento no Game Pass e o <a href="https://www.youtube.com/watch?v=kYJCaGax21E" target="_blank">crossover com Ultrakill</a> serviram como multiplicadores de marketing.</li>
+                    </ul>
+                    <blockquote class="border-l-4 border-pink-500 pl-4 py-2 italic bg-gray-900 bg-opacity-50 rounded-r-lg">
+                        "O sucesso de marketing do jogo não se deve a uma campanha publicitária inteligente, mas à criação de um produto tão atraente... que sua própria existência... impulsionaram todo o ciclo promocional."
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Slide 5: Ponto Forte -->
+            <div id="slide-5" class="slide h-full hidden flex flex-col">
+                <h2 class="font-title text-2xl md:text-4xl text-glow-cyan mb-6 text-center flex-shrink-0">5. PONTO FORTE</h2>
+                 <div class="slide-content pr-4 flex-grow">
+                    <p class="mb-4">A força principal reside na <strong class="text-pink-400">coesão perfeita entre sua identidade visual distinta e seu loop de jogabilidade central</strong>.</p>
+                    <ul class="list-disc list-inside space-y-3 mb-6">
+                        <li><strong class="text-cyan-400">Estética Impecável:</strong> Uma emulação fiel de animes da era OVA (anos 90), criando um "anime jogável".</li>
+                        <li><strong class="text-cyan-400">Loop de Dopamina:</strong> A mecânica do cronômetro de 10 segundos (<span class="text-pink-400">"Sua VIDA é TEMPO"</span>) força um ritmo frenético e agressivo.</li>
+                        <li><strong class="text-cyan-400">Coesão Narrativa:</strong> A história satiriza a "economia da atenção" e justifica a mecânica de jogo, criando um poderoso meta-comentário.</li>
+                    </ul>
+                    <blockquote class="border-l-4 border-pink-500 pl-4 py-2 italic bg-gray-900 bg-opacity-50 rounded-r-lg">
+                        "Ele usa as mesmas mecânicas psicológicas dos sistemas que satiriza para se tornar atraente. O jogador *se torna* a pessoa que precisa do estímulo constante de dopamina para sobreviver."
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Slide 6: Ponto Fraco + Bônus -->
+            <div id="slide-6" class="slide h-full hidden flex flex-col">
+                <h2 class="font-title text-2xl md:text-4xl text-glow-cyan mb-6 text-center flex-shrink-0">6. PONTO FRACO & RECOMENDAÇÕES</h2>
+                 <div class="slide-content pr-4 flex-grow">
+                    <p class="mb-4"><strong class="text-pink-400">Ponto Fraco 1: Batalhas contra Chefes</strong></p>
+                    <p class="mb-4">O jogo <strong class="text-cyan-400">remove a mecânica central do cronômetro</strong> durante as lutas contra chefes, quebrando a tensão e tornando os encontros menos impactantes.</p>
+                    
+                    <p class="mb-4 mt-6"><strong class="text-pink-400">Ponto Fraco 2: Rejogabilidade a Longo Prazo</strong></p>
+                    <p class="mb-4">A campanha é relativamente curta e a variedade de conteúdo pode parecer repetitiva, limitando o engajamento a longo prazo.</p>
+
+                    <p class="mb-4 mt-6"><strong class="text-pink-400">Bônus (Recomendações Estratégicas)</strong></p>
+                     <ul class="list-disc list-inside space-y-2">
+                        <li>Reintegrar o cronômetro nas lutas contra chefes para manter a pressão.</li>
+                        <li>Expandir drasticamente a variedade de armas, melhorias, inimigos e ambientes.</li>
+                        <li>Adicionar novos personagens jogáveis para oferecer novas formas de experimentar o jogo.</li>
+                    </ul>
+
+                    <blockquote class="border-l-4 border-pink-500 pl-4 py-2 italic bg-gray-900 bg-opacity-50 rounded-r-lg mt-6">
+                        "Esta decisão de design [remover o cronômetro dos chefes] quebra fundamentalmente a tensão central que define a experiência de Mullet Madjack."
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Slide 7: Agradecimento -->
+            <div id="slide-7" class="slide h-full hidden flex flex-col items-center justify-center text-center fade-in">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-8 mb-12">
+                    <img src="https://images.squarespace-cdn.com/content/v1/660d6d27443b3c3246714777/a8f0b798-299f-43e6-993c-238446215354/MMJ_Logo_White.png?format=1500w" 
+                         alt="Logo do Mullet Madjack" 
+                         class="h-20 md:h-24 w-auto logo-glow"
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x100/0d0d0d/ff00a0?text=Mullet+Madjack';">
+                    <img src="https://images.squarespace-cdn.com/content/v1/660d6d27443b3c3246714777/4f6d4d12-073c-4113-92f1-62d47f0f6738/hammer95.png?format=1500w" 
+                         alt="Logo da HAMMER95" 
+                         class="h-20 md:h-24 w-auto logo-glow"
+                         onerror="this.onerror=null;this.src='https://placehold.co/200x200/0d0d0d/00ffff?text=HAMMER95';">
+                </div>
+                <h1 class="font-title text-4xl md:text-6xl text-glow-cyan">OBRIGADO!</h1>
+            </div>
+        </div>
+
+        <!-- Navegação -->
+        <div class="mt-auto pt-4 flex justify-between items-center border-t-2 border-cyan-500 border-opacity-50">
+            <button id="prev-btn" class="nav-button font-title text-lg px-6 py-2 border-2 border-cyan-400 rounded-md text-cyan-400">ANTERIOR</button>
+            <div id="slide-counter" class="font-title text-lg text-white">SLIDE 1 / 7</div>
+            <button id="next-btn" class="nav-button font-title text-lg px-6 py-2 border-2 border-cyan-400 rounded-md text-cyan-400">PRÓXIMO</button>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de navegação da apresentação
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const slideCounter = document.getElementById('slide-counter');
+            
+            let currentSlide = 0;
+            const totalContentSlides = slides.length - 2; // Desconsidera o slide de título e o de obrigado
+
+            function updateSlide() {
+                slides.forEach((slide, index) => {
+                    if (index === currentSlide) {
+                        slide.classList.remove('hidden');
+                        slide.classList.add('fade-in');
+                    } else {
+                        slide.classList.add('hidden');
+                        slide.classList.remove('fade-in');
+                    }
+                });
+
+                // Atualiza o contador e os botões
+                if (currentSlide === 0) {
+                    slideCounter.textContent = 'TÍTULO';
+                    prevBtn.disabled = true;
+                } else if (currentSlide === slides.length - 1) {
+                    slideCounter.textContent = 'FIM';
+                    nextBtn.disabled = true;
+                } else {
+                    slideCounter.textContent = `SLIDE ${currentSlide} / ${totalContentSlides}`;
+                    prevBtn.disabled = false;
+                    nextBtn.disabled = false;
+                }
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    updateSlide();
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlide();
+                }
+            });
+
+            // Inicializa a apresentação
+            updateSlide();
+        });
+    </script>
+</body>
+</html>
+
